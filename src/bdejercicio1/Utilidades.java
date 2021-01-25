@@ -64,8 +64,14 @@ public class Utilidades {
             return false;
         }
         try {
-            int validarNumero=Integer.parseInt(numero);
-            return true;
+             char a = numero.charAt(0);
+            if (a == '0') {
+                int validarNumero = Integer.parseInt(numero);
+                return true;
+            } else {
+                return false;
+            }
+
         } catch (Exception e) {
             return false;
         }
