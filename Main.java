@@ -1,5 +1,8 @@
 
-package bdejercicio1;
+package bdejercicio1.conexion;
+
+import bdejercicio1.controlador.personabd;
+import bdejercicio1.vistas.GestionPersona;
 
 public class Main {
 
@@ -22,7 +25,7 @@ public class Main {
 //        } else {
 //            System.out.println("No se pudo eliminar");
 //        }
-        ventana ventana = new ventana();
+       
 
     }
     

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bdejercicio1;
+package bdejercicio1.controlador;
 
+import bdejercicio1.modelo.Persona;
+import conexionbd.bdejercicio;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,13 +82,13 @@ public class personabd {
         return eliminar;
     }
 
-    public List<Persona> obtenerPersonas() {
+    public ArrayList<Persona> obtenerPersonas() {
         Connection co = null;
         Statement stm = null;
         //Sentencia de JDBC para obtener valores de la base de datos.
         ResultSet rs = null;
         String sql = "SELECT * FROM bdejercicio1.persona;";
-        List<Persona> listaPersonas = new ArrayList<Persona>();
+        ArrayList<Persona> listaPersonas = new ArrayList<Persona>();
         try {
             co = new bdejercicio().Conexion_Mysql();
             stm = co.createStatement();
@@ -98,8 +100,8 @@ public class personabd {
                 c.setNombre(rs.getString(3));
                 c.setApellido(rs.getString(4));
                 c.setDireccion(rs.getString(5));
-                c.setCorreo(rs.getString(6));
-                c.setTelefono(rs.getString(7));
+                c.setCorreo(rs.getString(7));
+                c.setTelefono(rs.getString(6));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -112,5 +114,65 @@ public class personabd {
         return listaPersonas;
     }
 
-    
+   //Metodo para buscar una persona por cedula
+    public Persona getPersonaCedula(String cedula) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Persona c = null;
+        String sql = "SELECT * FROM bdejercicio1.persona where cedula like "+cedula+";";
+        try {
+            co = new bdejercicio().Conexion_Mysql();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Persona();
+                c.setIdPersona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombre(rs.getString(3));
+                c.setApellido(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return c;
+    }
+ 
+    //Metodo para buscar una persona por cedula
+    public Persona getPersonatelefono(String telefono) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Persona c = null;
+        String sql = "SELECT * FROM bdejercicio1.persona where telefono ="+telefono+";";
+        try {
+            co = new bdejercicio().Conexion_Mysql();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Persona();
+                c.setIdPersona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombre(rs.getString(3));
+                c.setApellido(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(7));
+                c.setTelefono(rs.getString(6));
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return c;
+    }
 }

@@ -1,5 +1,5 @@
 
-package bdejercicio1;
+package bdejercicio1.modelo;
 
 public class Persona {
      private int idPersona; 
